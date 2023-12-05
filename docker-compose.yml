@@ -1,0 +1,9 @@
+version: '3'
+services:
+    web-service:
+        build: .
+        volumes:
+            - .:/app
+            - /app/node_modules
+        ports:
+            - 3100:80
