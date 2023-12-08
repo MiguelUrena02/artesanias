@@ -7,3 +7,27 @@ services:
             - /app/node_modules
         ports:
             - 3100:80
+        command: ["npm", "run", "debug"]
+    mysql:
+        image: mysql:8.0.35     
+        volumes:
+            - mysql_data:/var/lib/mysql
+        expose:
+            - 3306
+        ports:
+            - 3307:3306
+        environment:
+            MYSQL_ROOT_PASSWORD_FILE: /run/secrets/MYSQL_ROOT_PASSWORD
+            MYSQL_DATABASE: artesanias
+            MYSQL_USER: user_artesanias
+            MYSQL_PASSWORD_FILE: /run/secrets/MYSQL_PASSWORD
+        secrets:
+            - MYSQL_ROOT_PASSWORD
+            - MYSQL_PASSWORD
+volumes:
+  mysql_data: 
+secrets:
+  MYSQL_ROOT_PASSWORD:
+   file: ./.secrets/MYSQL_ROOT_PASSWORD.txt
+  MYSQL_PASSWORD:
+   file: ./.secrets/MYSQL_PASSWORD.txt

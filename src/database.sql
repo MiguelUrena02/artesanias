@@ -1,61 +1,72 @@
-#create database plataforma_artesanias;
-use plataforma_artesanias;
+-- Crear la base de datos
+CREATE DATABASE IF NOT EXISTS plataforma_artesanias;
 
-create table usuarios(
-    id_usuario integer not null auto_increment,
-    nombre varchar(128) not null,
-    apellidos varchar(255) not null,
-    calle varchar (100) not null,
-    colonia varchar (100) not null,
-    ciudad varchar (100) not null,
-    estado varchar (100) not null,
-    primary key (id_usuario)
+-- Usar la base de datos
+USE plataforma_artesanias;
+
+-- Tabla de usuarios
+CREATE TABLE IF NOT EXISTS usuarios (
+    id_usuario INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(128) NOT NULL,
+    apellidos VARCHAR(255) NOT NULL,
+    calle VARCHAR(100) NOT NULL,
+    colonia VARCHAR(100) NOT NULL,
+    ciudad VARCHAR(100) NOT NULL,
+    estado VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id_usuario)
 );
 
-create table oficios(
-    id_oficio integer not null auto_increment,
-    nombre varchar (100) not null,
-    primary key (id_oficio)
+-- Tabla de oficios
+CREATE TABLE IF NOT EXISTS oficios (
+    id_oficio INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id_oficio)
 );
 
-create table artesanos(
-    id_artesano integer not null auto_increment,
-    nombre varchar(255) not null,
-    apellidos varchar(255) not null,
-    calle varchar (100) not null,
-    colonia varchar (100) not null,
-    ciudad varchar (100) not null,
-    estado varchar (100) not null,
-    fk_oficio varchar (30) not null,
-    descripcion varchar (255) not null,
-    primary key (id_artesano),
-    foreign key (fk_id_autor) references oficios(id_oficio)
+-- Tabla de artesanos
+CREATE TABLE IF NOT EXISTS artesanos (
+    id_artesano INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    apellidos VARCHAR(255) NOT NULL,
+    calle VARCHAR(100) NOT NULL,
+    colonia VARCHAR(100) NOT NULL,
+    ciudad VARCHAR(100) NOT NULL,
+    estado VARCHAR(100) NOT NULL,
+    fk_oficio INT NOT NULL,
+    descripcion VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id_artesano),
+    FOREIGN KEY (fk_oficio) REFERENCES oficios(id_oficio)
 );
 
-create table tipo_de_artesanias(
-    id_tipo integer not null auto_increment,
-    nombre varchar(50) not null,
-    primary key (id_tipo)
+-- Tabla de tipos de artesanías
+CREATE TABLE IF NOT EXISTS tipo_de_artesanias (
+    id_tipo INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id_tipo)
 );
 
-create table artesanias(
-    id_artesania integer not null auto_increment,
-    nombre varchar(255) not null,
-    descripcion varchar (255) not null,
-    imagen LONGBLOB not null,
-    precio float not null,
-    fk_artesano varchar (1000) not null,
-    fk_tipo_de_artesania integer not null,
-    primary key (id_artesania),
-    foreign key (fk_tipo_de_artesania) references tipo_de_artesania(id_tipo),
-    foreign key (fk_artesano) references artesanos(id_artesano)
+-- Tabla de artesanías
+CREATE TABLE IF NOT EXISTS artesanias (
+    id_artesania INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    descripcion VARCHAR(255) NOT NULL,
+    imagen LONGBLOB,
+    precio FLOAT NOT NULL,
+    fk_artesano INT NOT NULL,
+    fk_tipo_de_artesania INT NOT NULL,
+    PRIMARY KEY (id_artesania),
+    FOREIGN KEY (fk_tipo_de_artesania) REFERENCES tipo_de_artesanias(id_tipo),
+    FOREIGN KEY (fk_artesano) REFERENCES artesanos(id_artesano)
 );
 
-create table carritos(
-    id_carrito integer auto_increment not null,
-    fk_artesania integer not null,
-    fk_usuario integer not null,
-    cantidad integer not null,
-    foreign key (fk_artesania) references artesanias(id_artesania),
-    foreign key (fk_usuario) references usuarios(id_usuario)
+-- Tabla de carritos
+CREATE TABLE IF NOT EXISTS carritos (
+    id_carrito INT AUTO_INCREMENT NOT NULL,
+    fk_artesania INT NOT NULL,
+    fk_usuario INT NOT NULL,
+    cantidad INT NOT NULL,
+    PRIMARY KEY (id_carrito),
+    FOREIGN KEY (fk_artesania) REFERENCES artesanias(id_artesania),
+    FOREIGN KEY (fk_usuario) REFERENCES usuarios(id_usuario)
 );
+
