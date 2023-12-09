@@ -17,6 +17,11 @@ class OficiosModel{
         const result = await db('oficios').insert(datos).returning('id_oficio');
         return result[0];
     }
+
+    static async actualizar(id, campos) {
+        let db = await connectMySQL();
+        return await db('oficios').where('id_oficio', id).update(campos);
+    }
 }
 
 module.exports= OficiosModel;

@@ -17,6 +17,11 @@ class CarritoModel{
         const result = await db('carritos').insert(datos).returning('id_carrito');
         return result[0];
     }
+
+    static async actualizar(id, campos) {
+        let db = await connectMySQL();
+        return await db('carritos').where('id_carrito', id).update(campos);
+    }
 }
 
 module.exports= CarritoModel;

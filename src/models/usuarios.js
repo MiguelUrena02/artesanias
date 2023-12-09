@@ -17,6 +17,11 @@ class UsuariosModel{
         const result = await db('usuarios').insert(datos).returning('id_usuario');
         return result[0];
     }
+
+    static async actualizar(id, campos) {
+        let db = await connectMySQL();
+        return await db('usuarios').where('id_usuario', id).update(campos);
+    }
 }
 
 module.exports= UsuariosModel;

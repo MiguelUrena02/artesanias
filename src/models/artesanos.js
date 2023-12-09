@@ -17,6 +17,11 @@ class ArtesanosModel{
         const result = await db('artesanos').insert(datos).returning('id_artesano');
         return result[0];
     }
+
+    static async actualizar(id, campos) {
+        let db = await connectMySQL();
+        return await db('artesanos').where('id_artesano', id).update(campos);
+    }
 }
 
 module.exports= ArtesanosModel;

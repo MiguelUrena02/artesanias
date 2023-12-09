@@ -17,6 +17,11 @@ class ArtesaniasModel{
         const result = await db('artesanias').insert(datos).returning('id_artesania');
         return result[0];
     }
+    
+    static async actualizar(id, campos) {
+        let db = await connectMySQL();
+        return await db('artesanias').where('id_artesania', id).update(campos);
+    }
 }
 
 module.exports= ArtesaniasModel;

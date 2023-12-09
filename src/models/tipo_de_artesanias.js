@@ -17,6 +17,11 @@ class TAModel{
         const result = await db('tipo_de_artesanias').insert(datos).returning('id_tipo');
         return result[0];
     }
+
+    static async actualizar(id, campos) {
+        let db = await connectMySQL();
+        return await db('tipo_de_artesanias').where('id_tipo', id).update(campos);
+    }
 }
 
 module.exports= TAModel;
