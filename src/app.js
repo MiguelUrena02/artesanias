@@ -57,14 +57,14 @@ app.post('/oficios', OficiosControllers.indexPost);
 app.patch('/oficios/:id([0-9]+)', OficiosControllers.itemPatch);
 
 /* Funcion GET Tipo de Artesanias */
-app.get('/tipo_de_artesanias', TAControllers.indexGet);
-app.get('/tipo_de_artesanias/:id([0-9]+)', TAControllers.itemGet);
+app.get('/tipo-de-artesanias', TAControllers.indexGet);
+app.get('/tipo-de-artesanias/:id([0-9]+)', TAControllers.itemGet);
 
 /* Funcion POST Tipo de Artesanias */
-app.post('/tipo_de_artesanias', TAControllers.indexPost);
+app.post('/tipo-de-artesanias', TAControllers.indexPost);
 
 /* Funcion PATCH Tipo de Artesanias*/
-app.patch('/tipo_de_artesanias/:id([0-9]+)', TAControllers.itemPatch);
+app.patch('/tipo-de-artesanias/:id([0-9]+)', TAControllers.itemPatch);
 
 /* Funcion GET Usuarios */
 app.get('/usuarios', UsuariosControllers.indexGet);
